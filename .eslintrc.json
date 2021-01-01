@@ -36,7 +36,7 @@
         "functional/no-expression-statement": [
             "error",
             {
-                "ignorePattern": ["^use", "^set", "^console","^on"]
+                "ignorePattern": ["^use", "^set", "^console", "^on"]
             }
         ],
         "functional/functional-parameters": [
@@ -44,9 +44,9 @@
             {
                 "enforceParameterCount": {
                     "count": "atLeastOne",
-                    "ignoreIIFE": false
+                    "ignoreIIFE": true
                 },
-                "ignorePattern": ["^tsInstalled$", "^[A-Z][a-z0-9]"]
+                "ignorePattern": ["^tsInstalled$", "^[A-Z][a-z0-9]", "Handler$"]
             }
         ]
     },

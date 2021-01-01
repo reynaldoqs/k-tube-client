@@ -1,46 +1,60 @@
-/* eslint-disable functional/prefer-readonly-type */
 /* eslint-disable functional/prefer-type-literal */
-
 import { DefaultTheme } from 'styled-components';
 import 'styled-components';
 
 declare module 'styled-components' {
     export interface DefaultTheme {
-        borderRadius: string;
-        mainPadding: string;
-        colors: {
-            primary: {
-                main: string;
-                light: string;
-                dark: string;
+        readonly borderRadius: string;
+        readonly mainPadding: string;
+        readonly colors: {
+            readonly primary: {
+                readonly main: string;
+                readonly light: string;
+                readonly dark: string;
             };
-            secondary: {
-                main: string;
-                light: string;
-                dark: string;
+            readonly secondary: {
+                readonly main: string;
+                readonly light: string;
+                readonly dark: string;
             };
-            accent: {
-                main: string;
-                light: string;
-                dark: string;
+            readonly accent: {
+                readonly main: string;
+                readonly light: string;
+                readonly dark: string;
             };
-            neutral: {
-                main: string;
-                dark: string;
-                darker: string;
-                light: string;
-                lighter: string;
-                lightest: string;
+            readonly neutral: {
+                readonly main: string;
+                readonly dark: string;
+                readonly darker: string;
+                readonly light: string;
+                readonly lighter: string;
+                readonly lightest: string;
             };
-            sections: {
-                mainBackground: string;
+            readonly sections: {
+                readonly mainBackground: string;
+            };
+            readonly text: {
+                readonly primary: {
+                    readonly main: string;
+                    readonly light: string;
+                    readonly dark: string;
+                };
             };
         };
-        devices: {
-            mobileL: string;
-            tablet: string;
-            laptop: string;
-            desktop: string;
+        readonly components: {
+            readonly navBar: {
+                readonly smHeight: string;
+                readonly mdHeight: string;
+            };
+            readonly container: {
+                readonly md: string;
+            };
+        };
+        readonly deviceBreakpoints: {
+            readonly mobileL: string;
+            readonly tablet: string;
+            readonly laptop: string;
+            readonly desktop: string;
         };
     }
 }
@@ -50,7 +64,7 @@ export const mainTheme: DefaultTheme = {
     mainPadding: '16px',
     colors: {
         primary: {
-            main: 'white',
+            main: '#FE6437',
             light: 'white',
             dark: 'white',
         },
@@ -60,12 +74,12 @@ export const mainTheme: DefaultTheme = {
             dark: 'white',
         },
         accent: {
-            main: 'white',
-            light: 'white',
+            main: '#FF4757',
+            light: '#FF4757',
             dark: 'white',
         },
         neutral: {
-            main: 'white',
+            main: '#707070',
             dark: 'white',
             darker: 'white',
             light: 'white',
@@ -73,10 +87,26 @@ export const mainTheme: DefaultTheme = {
             lightest: 'white',
         },
         sections: {
-            mainBackground: '#252530',
+            mainBackground: '#131416',
+        },
+        text: {
+            primary: {
+                main: '#707070',
+                light: '#f1f1f1',
+                dark: '#919191',
+            },
         },
     },
-    devices: {
+    components: {
+        navBar: {
+            smHeight: '56px',
+            mdHeight: '64px',
+        },
+        container: {
+            md: '768px',
+        },
+    },
+    deviceBreakpoints: {
         mobileL: '(min-width: 425px)',
         tablet: '(min-width: 768px)',
         laptop: '(min-width: 1024px)',

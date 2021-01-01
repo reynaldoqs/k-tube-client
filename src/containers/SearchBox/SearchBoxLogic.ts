@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+/*
 import { Video } from '../../types';
 import { searchVideos } from '../../api/videos';
 
@@ -18,7 +18,7 @@ export const useSearchVideos = (initialQuery: string): SearchVideosHook => {
         setLoading(true);
         // eslint-disable-next-line functional/no-expression-statement
         searchVideos(query).then((response) => {
-            const videos: readonly Video[] = response.data;
+            const videos: readonly Video[] = response;
             setVideos(videos);
         });
     };
@@ -33,3 +33,4 @@ export const useSearchVideos = (initialQuery: string): SearchVideosHook => {
         videos,
     };
 };
+*/

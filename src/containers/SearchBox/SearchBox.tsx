@@ -1,18 +1,23 @@
 import React from 'react';
+import { useQueryParam, StringParam } from 'use-query-params';
 
 import { SearchInput } from '../../components/';
-import { useSearchVideos } from './SearchBoxLogic';
 
-export function SearchBox(): React.ReactElement {
-    const onSearchHandler = (query: string): void => {
+type Props = {
+    readonly onNavigateToSearch: () => void;
+};
+
+export const SearchBox: React.FC<Props> = ({ onNavigateToSearch }: Props): React.ReactElement => {
+    const [_, setQuery] = useQueryParam('q', StringParam);
+
+    const onSearchHandler = async (query: string): Promise<void> => {
+        //get recentlye search items
+        // emit if we resnt in search view
         console.log(query);
+
+        onNavigateToSearch();
+        setQuery(query);
     };
-    return (
-        <div>
-            <div>
-                <SearchInput onSearch={onSearchHandler} />
-            </div>
-            <pre>{JSON.stringify({}, null, 2)}</pre>
-        </div>
-    );
-}
+
+    return <SearchInput onSearch={onSearchHandler} />;
+};
