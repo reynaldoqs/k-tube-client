@@ -3,9 +3,10 @@ import { ThemeProvider } from 'styled-components';
 import { globalHistory, Router } from '@reach/router';
 import { QueryParamProvider } from 'use-query-params';
 
-import { Search, Home } from './views';
+import { Search, Home, Play } from './views';
 import { MainNavBar } from './containers';
 import { GlobalStyle, mainTheme } from './styles';
+import { ROUTES } from './constants';
 
 function App(): React.ReactElement {
     return (
@@ -15,7 +16,8 @@ function App(): React.ReactElement {
                 <MainNavBar />
                 <Router>
                     <Home path="/" />
-                    <Search path="/search" />
+                    <Search path={ROUTES.search} />
+                    <Play path={ROUTES.player} />
                 </Router>
             </QueryParamProvider>
         </ThemeProvider>

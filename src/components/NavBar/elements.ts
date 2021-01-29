@@ -6,7 +6,7 @@ export const NavBarContainer = styled.nav`
     top: 0;
     width: 100%;
     display: flex;
-    background-color: ${(props) => props.theme.colors.sections.mainBackground};
+    background-color: ${(props) => props.theme.colors.sections.darkBackground};
     height: ${(props) => props.theme.components.navBar.smHeight};
     padding: 8px ${(props) => props.theme.mainPadding};
     @media ${(props) => props.theme.deviceBreakpoints.tablet} {

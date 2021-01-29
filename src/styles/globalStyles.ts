@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
-        background-color: ${(props) => props.theme.colors.sections.mainBackground};
+        background-color: ${(props) => props.theme.colors.sections.darkBackground};
         color: gray;
     }
 
@@ -13,23 +13,27 @@ export const GlobalStyle = createGlobalStyle`
             margin: 0;
             padding: 0;
     }
+    ::placeholder {
+        color: ${(props) => props.theme.colors.text.primary.dark};
+        opacity: 1;
+    }
     ul {
-            list-style: none
+        list-style: none
     }
         
-        ::-webkit-scrollbar {
-            width: 12px;
+    ::-webkit-scrollbar {
+        width: 10px;
     }
         
-        ::-webkit-scrollbar-track {
-            border-radius: 10px;
+    ::-webkit-scrollbar-track {
+        border-radius: 10px;
     }
         
-        ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background: #363646; 
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: ${(props) => props.theme.colors.sections.mainBackground};
     }
-        ::-webkit-scrollbar-thumb:window-inactive {
-            background: #363646; 
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: ${(props) => props.theme.colors.sections.mainBackground};
     }
 `;

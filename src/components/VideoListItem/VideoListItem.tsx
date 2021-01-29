@@ -1,35 +1,36 @@
 import React from 'react';
-import { defaultTo, prop, path } from 'ramda';
 
-import { Video } from '../../types';
+import { FuncParam, Video } from '../../types';
 import {
     VideoItemContainer,
     VideoAvatarContainer,
     VideoThumbnal,
     InformationContainer,
     OptionsContainer,
+    VideoMainOption,
 } from './elements';
 
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import { CardSubtitle, SmallText } from '../sharedElements';
+import { CardSubtitle, CardInformation } from '../sharedElements';
 import { IconButton } from '../IconButton';
 
 type Props = {
     readonly video: Video;
+    readonly onSelectVideo: FuncParam<string, void>;
 };
 
-export const VideoListItem: React.FC<Props> = ({ video }: Props): React.ReactElement => {
-    const getVideoSrc = path(['snippet', 'thumbnails', 'key', 'url']);
-    //const getVideoSrc = prop('snippet.thumbnals.key.url', video);
-    const getVideoThumbnail = defaultTo('audiman', getVideoSrc);
+export const VideoListItem: React.FC<Props> = ({ video, onSelectVideo }: Props): React.ReactElement => {
     return (
         <VideoItemContainer>
             <VideoAvatarContainer>
                 <VideoThumbnal src={video.snippet.thumbnails.key.url} />
+                <VideoMainOption onClick={() => onSelectVideo(video.id.videoId)}>
+                    <IconButton size="lg" icon={faPlay} />
+                </VideoMainOption>
             </VideoAvatarContainer>
             <InformationContainer>
-                <CardSubtitle>{video.snippet.title}</CardSubtitle>
-                <SmallText>duration 1:12 </SmallText>
+                <CardSubtitle maxLines={2}>{video.snippet.title}</CardSubtitle>
+                <CardInformation>duration 1:12 </CardInformation>
             </InformationContainer>
             <OptionsContainer>
                 <IconButton color="accent" bordered icon={faPlay} />
@@ -38,6 +39,6 @@ export const VideoListItem: React.FC<Props> = ({ video }: Props): React.ReactEle
     );
 };
 
-export const renderVideoItem = (video: Video): React.ReactElement => (
-    <VideoListItem key={video.id.videoId} video={video} />
+export const renderVideoItem = (video: Video, onSelectVideo: FuncParam<string, void>): React.ReactElement => (
+    <VideoListItem key={video.id.videoId} video={video} onSelectVideo={onSelectVideo} />
 );

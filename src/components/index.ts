@@ -4,3 +4,4 @@ export * from './IconButton';
 export * from './VerticalVideoList';
 export * from './VideoListItem';
 export * from './sharedElements';
+export * from './LoadingSpinner';

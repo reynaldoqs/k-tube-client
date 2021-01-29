@@ -2,18 +2,17 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 
 export const SearchInputContainer = styled(animated.div)`
-    background-color: rgba(0, 0, 0, 1);
+    background-color: ${(props) => props.theme.colors.sections.mainBackground};
     position: absolute;
     width: calc(100% - 12px);
     height: 40px;
-    border-radius: 20px;
+    border-radius: ${(props) => props.theme.borderRadius.sm};
     margin: 0 auto;
     max-width: 100%;
     display: flex;
     padding: 6px 10px;
     @media ${(props) => props.theme.deviceBreakpoints.tablet} {
         width: 580px;
-        background-color: rgba(0, 0, 0, 0.7);
     }
 `;
 

@@ -2,19 +2,28 @@ import React from 'react';
 
 import { map } from 'ramda';
 
-import { Video } from '../../types';
-import { renderVideoItem, Container } from '../';
-import { VerticalVideoListContainer } from './elements';
+import { FuncParam, Video } from '../../types';
+import { Container, renderVideoItem, Subtitle } from '../';
+import { VerticalVideoListContainer, VerticalList } from './elements';
 
 type Props = {
     readonly videos: readonly Video[];
+    readonly onSelectVideo: FuncParam<string, void>;
 };
 
-export const VerticalVideoList: React.FC<Props> = ({ videos }: Props): React.ReactElement => {
-    const displayVideos = map(renderVideoItem);
+export const VerticalVideoList: React.FC<Props> = ({ videos, onSelectVideo }: Props): React.ReactElement => {
+    const renderVideos = map((video: Video) => renderVideoItem(video, onSelectVideo));
     return (
-        <Container>
-            <VerticalVideoListContainer>{displayVideos(videos)}</VerticalVideoListContainer>
-        </Container>
+        <VerticalVideoListContainer>
+            <Container>
+                <Subtitle>Resultados</Subtitle>
+            </Container>
+            <VerticalList>{renderVideos(videos)}</VerticalList>
+        </VerticalVideoListContainer>
     );
 };
+
+export const renderVideoList = (
+    videos: readonly Video[],
+    onSelectVideo: FuncParam<string, void>,
+): React.ReactElement => <VerticalVideoList videos={videos} onSelectVideo={onSelectVideo} />;

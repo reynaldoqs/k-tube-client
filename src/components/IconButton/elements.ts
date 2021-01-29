@@ -1,10 +1,11 @@
 import styled, { DefaultTheme, css } from 'styled-components';
 
-import { ButtonColorType } from './IconButton';
+import { ButtonColorType, ButtonSize } from './IconButton';
 
 type buttonStyleType = {
     readonly color: ButtonColorType;
     readonly bordered: boolean;
+    readonly size: ButtonSize;
 };
 
 type ColorTypes = {
@@ -27,7 +28,7 @@ export const IconButtonContainer = styled.button<buttonStyleType>`
     border: none;
     width: 34px;
     height: 34px;
-    border-radius: 12px;
+    border-radius: ${(props) => props.theme.borderRadius.lg};
     cursor: pointer;
     font-size: ${(props) => (props.bordered ? '0.9rem' : '1.1rem')};
     line-height: 32px;

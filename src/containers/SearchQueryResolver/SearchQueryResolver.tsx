@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryParam, StringParam } from 'use-query-params';
-import { pipe, otherwise, always, andThen, propOr } from 'ramda';
+import { pipe, andThen } from 'ramda';
+import { navigate } from '@reach/router';
 
 import { Video } from '../../types';
 import { searchVideos } from '../../api/videos';
-import { VerticalVideoList } from '../../components';
+import { RenderSpinner, renderVideoList } from '../../components';
+import { setStateAndPipeData, setPipedDataAndSetState } from '../../utils';
+import { updateVideosOnQuery, navigateAndSetVideo } from './SearchQueryResolver.logic';
+import { KARAOKE_VIDEO_YOUTUBE, KARAOKE_QUERY, ROUTES } from '../../constants';
 
 export function SearchQueryResolver(): React.ReactElement {
-    const [query] = useQueryParam('q', StringParam);
+    const [query] = useQueryParam(KARAOKE_QUERY, StringParam);
+    const [, setVideoParam] = useQueryParam(KARAOKE_VIDEO_YOUTUBE, StringParam);
     const [videos, setVideos] = useState<readonly Video[]>([]);
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    const safeQuery = console.log('no implemente');
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const setNotLoading = (q: any) => setLoading(true);
-    const getVideos = pipe(searchVideos, andThen(setVideos), setNotLoading);
+    const onSelectVideo = navigateAndSetVideo(navigate, ROUTES.player, setVideoParam);
 
-    // eslint-disable-next-line functional/functional-parameters
-    useEffect(() => {
-        console.log('re renders | with query', query);
-        setLoading(false);
-        // eslint-disable-next-line functional/no-expression-statement
-        query && getVideos(query);
-    }, [query]);
-    return <VerticalVideoList videos={videos} />;
+    const setLoadingOn = setStateAndPipeData<boolean, string>(setLoading, true);
+    const setLoadingOff = setPipedDataAndSetState<readonly Video[], boolean>(setVideos, setLoading, false);
+
+    const retrieveVideos = pipe(setLoadingOn, searchVideos, andThen(setLoadingOff));
+    useEffect(updateVideosOnQuery(query, retrieveVideos), [query]);
+
+    return isLoading ? RenderSpinner() : renderVideoList(videos, onSelectVideo);
 }

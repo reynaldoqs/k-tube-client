@@ -4,7 +4,11 @@ import 'styled-components';
 
 declare module 'styled-components' {
     export interface DefaultTheme {
-        readonly borderRadius: string;
+        readonly borderRadius: {
+            readonly sm: string;
+            readonly md: string;
+            readonly lg: string;
+        };
         readonly mainPadding: string;
         readonly colors: {
             readonly primary: {
@@ -32,6 +36,8 @@ declare module 'styled-components' {
             };
             readonly sections: {
                 readonly mainBackground: string;
+                readonly lightBackground: string;
+                readonly darkBackground: string;
             };
             readonly text: {
                 readonly primary: {
@@ -60,7 +66,11 @@ declare module 'styled-components' {
 }
 
 export const mainTheme: DefaultTheme = {
-    borderRadius: '8px',
+    borderRadius: {
+        sm: '4px',
+        md: '6px',
+        lg: '10px',
+    },
     mainPadding: '16px',
     colors: {
         primary: {
@@ -79,7 +89,7 @@ export const mainTheme: DefaultTheme = {
             dark: 'white',
         },
         neutral: {
-            main: '#707070',
+            main: '#C0C5D4',
             dark: 'white',
             darker: 'white',
             light: 'white',
@@ -87,13 +97,15 @@ export const mainTheme: DefaultTheme = {
             lightest: 'white',
         },
         sections: {
-            mainBackground: '#131416',
+            mainBackground: '#10111D',
+            lightBackground: '#252136',
+            darkBackground: '#03040D',
         },
         text: {
             primary: {
-                main: '#707070',
-                light: '#f1f1f1',
-                dark: '#919191',
+                main: '#C0C5D4',
+                light: '#E7EEF3',
+                dark: '#979AB4',
             },
         },
     },

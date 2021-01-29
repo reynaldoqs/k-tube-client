@@ -5,21 +5,10 @@ import { NavBar } from '../../components';
 import { SearchBox } from '../SearchBox';
 
 export function MainNavBar(): React.ReactElement {
-    // eslint-disable-next-line functional/functional-parameters
-    const navigationHandler = (): void => {
-        //open search menu then navitate
-        //change name
-        console.log('navigate search');
-        onNavigate('/search');
-    };
-
+    const navigationHandler = (): Promise<void> => onNavigate('/search');
     return (
-        <>
-            <NavBar>
-                <>
-                    <SearchBox onNavigateToSearch={navigationHandler} />
-                </>
-            </NavBar>
-        </>
+        <NavBar>
+            <SearchBox navigateToSearch={navigationHandler} />
+        </NavBar>
     );
 }
