@@ -6,5 +6,3 @@ export const LoadingSpinner: React.FC = (): React.ReactElement => (
         <Spinner />
     </LoadingContainer>
 );
-
-export const RenderSpinner = (): React.ReactElement => <LoadingSpinner />;

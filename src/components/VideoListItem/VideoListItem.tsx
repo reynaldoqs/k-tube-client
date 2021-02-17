@@ -23,7 +23,7 @@ export const VideoListItem: React.FC<Props> = ({ video, onSelectVideo }: Props):
     return (
         <VideoItemContainer>
             <VideoAvatarContainer>
-                <VideoThumbnal src={video.snippet.thumbnails.key.url} />
+                <VideoThumbnal loading="lazy" src={video.snippet.thumbnails.key.url} />
                 <VideoMainOption onClick={() => onSelectVideo(video.id.videoId)}>
                     <IconButton size="lg" icon={faPlay} />
                 </VideoMainOption>

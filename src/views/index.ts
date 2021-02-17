@@ -1,3 +1,3 @@
-export * from './Search/Search';
-export * from './Home/Home';
-export * from './Play/Play';
+export * from './Search';
+export * from './Home';
+export * from './Karaoke';

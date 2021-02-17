@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { map } from 'ramda';
 
 import { FuncParam, Video } from '../../types';
-import { Container, renderVideoItem, Subtitle } from '../';
+import { Container, renderVideoItem, Subtitle } from '..';
 import { VerticalVideoListContainer, VerticalList } from './elements';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
     readonly onSelectVideo: FuncParam<string, void>;
 };
 
-export const VerticalVideoList: React.FC<Props> = ({ videos, onSelectVideo }: Props): React.ReactElement => {
+export const VideoListVertical: React.FC<Props> = ({ videos, onSelectVideo }: Props): React.ReactElement => {
     const renderVideos = map((video: Video) => renderVideoItem(video, onSelectVideo));
     return (
         <VerticalVideoListContainer>
@@ -22,8 +21,3 @@ export const VerticalVideoList: React.FC<Props> = ({ videos, onSelectVideo }: Pr
         </VerticalVideoListContainer>
     );
 };
-
-export const renderVideoList = (
-    videos: readonly Video[],
-    onSelectVideo: FuncParam<string, void>,
-): React.ReactElement => <VerticalVideoList videos={videos} onSelectVideo={onSelectVideo} />;

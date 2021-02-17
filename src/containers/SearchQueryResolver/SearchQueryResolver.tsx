@@ -5,7 +5,7 @@ import { navigate } from '@reach/router';
 
 import { Video } from '../../types';
 import { searchVideos } from '../../api/videos';
-import { RenderSpinner, renderVideoList } from '../../components';
+import { LoadingSpinner, VideoListVertical } from '../../components';
 import { setStateAndPipeData, setPipedDataAndSetState } from '../../utils';
 import { updateVideosOnQuery, navigateAndSetVideo } from './SearchQueryResolver.logic';
 import { KARAOKE_VIDEO_YOUTUBE, KARAOKE_QUERY, ROUTES } from '../../constants';
@@ -16,13 +16,17 @@ export function SearchQueryResolver(): React.ReactElement {
     const [videos, setVideos] = useState<readonly Video[]>([]);
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    const onSelectVideo = navigateAndSetVideo(navigate, ROUTES.player, setVideoParam);
+    const setVideoQueryThenNavigate = navigateAndSetVideo(navigate, ROUTES.karaoke, setVideoParam);
 
     const setLoadingOn = setStateAndPipeData<boolean, string>(setLoading, true);
-    const setLoadingOff = setPipedDataAndSetState<readonly Video[], boolean>(setVideos, setLoading, false);
+    const setVideosThenLoadingOff = setPipedDataAndSetState<readonly Video[], boolean>(setVideos, setLoading, false);
 
-    const retrieveVideos = pipe(setLoadingOn, searchVideos, andThen(setLoadingOff));
+    const retrieveVideos = pipe(setLoadingOn, searchVideos, andThen(setVideosThenLoadingOff));
     useEffect(updateVideosOnQuery(query, retrieveVideos), [query]);
 
-    return isLoading ? RenderSpinner() : renderVideoList(videos, onSelectVideo);
+    return isLoading ? (
+        <LoadingSpinner />
+    ) : (
+        <VideoListVertical videos={videos} onSelectVideo={setVideoQueryThenNavigate} />
+    );
 }

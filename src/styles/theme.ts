@@ -67,14 +67,14 @@ declare module 'styled-components' {
 
 export const mainTheme: DefaultTheme = {
     borderRadius: {
-        sm: '4px',
-        md: '6px',
-        lg: '10px',
+        sm: '6px',
+        md: '12px',
+        lg: '20px',
     },
     mainPadding: '16px',
     colors: {
         primary: {
-            main: '#FE6437',
+            main: '#FF9E00',
             light: 'white',
             dark: 'white',
         },

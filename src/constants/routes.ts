@@ -1,4 +1,5 @@
 export const ROUTES = {
+    home: '/',
     search: '/search',
-    player: '/play',
+    karaoke: '/play',
 };

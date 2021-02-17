@@ -3,18 +3,19 @@ import styled from 'styled-components';
 const itemHeight = '100px';
 const vaWidthSm = '100px';
 const vaWidthMd = '120px';
-const optWidth = '35px';
+const optWidth = '55px';
 
 export const VideoItemContainer = styled.li`
     width: 100%;
     max-width: ${(props) => props.theme.components.container.md};
     margin: 0 auto;
-    padding: 8px 10px;
+    padding: 0px;
     display: flex;
     scroll-snap-align: start;
     background-color: ${(props) => props.theme.colors.sections.mainBackground};
+    border-radius: ${(props) => props.theme.borderRadius.md};
     @media ${(props) => props.theme.deviceBreakpoints.tablet} {
-        padding: 12px 16px;
+        padding: 0px;
     }
 `;
 
@@ -31,7 +32,7 @@ export const VideoThumbnal = styled.img`
     object-fit: cover;
     width: 100%;
     height: 100%;
-    border-radius: ${(props) => props.theme.borderRadius.sm};
+    border-radius: ${(props) => props.theme.borderRadius.md};
 `;
 
 export const VideoMainOption = styled.div`
@@ -46,7 +47,7 @@ export const VideoMainOption = styled.div`
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
-    border-radius: ${(props) => props.theme.borderRadius.sm};
+    border-radius: ${(props) => props.theme.borderRadius.md};
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     ${VideoItemContainer}:hover & {
@@ -55,15 +56,16 @@ export const VideoMainOption = styled.div`
 `;
 
 export const InformationContainer = styled.div`
-    padding: 6px 12px;
+    padding: 8px 12px;
     width: calc(100% - ${vaWidthSm} - ${optWidth});
     @media ${(props) => props.theme.deviceBreakpoints.tablet} {
-        padding: 6px 20px;
+        padding: 10px 20px;
     }
 `;
 
 export const OptionsContainer = styled.div`
     opacity: 0;
+    padding-right: 10px;
     width: ${optWidth};
     height: ${itemHeight};
     display: flex;
@@ -72,5 +74,8 @@ export const OptionsContainer = styled.div`
     transition: opacity 0.3s ease-in-out;
     ${VideoItemContainer}:hover & {
         opacity: 1;
+    }
+    @media ${(props) => props.theme.deviceBreakpoints.tablet} {
+        padding-right: 20px;
     }
 `;
