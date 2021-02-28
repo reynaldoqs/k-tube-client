@@ -36,7 +36,7 @@
         "functional/no-expression-statement": [
             "error",
             {
-                "ignorePattern": ["^use", "^set", "^console", "^on"]
+                "ignorePattern": ["^use", "^set", "^console", "^on", "dispatch"]
             }
         ]
         /* "functional/functional-parameters": [

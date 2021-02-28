@@ -5,13 +5,14 @@ import { NavBarContainer, NavBarCenterElements, NavBarLeftElements, NavBarRightE
 import logo from '../../assets/images/logo01.png';
 import user from '../../assets/images/face.png';
 
-type Props = {
+export type NavBarProps = {
     readonly children: React.ReactElement;
+    readonly bgColor?: 'dark' | 'light' | 'main';
 };
 
-export const NavBar: React.FC<Props> = ({ children }: Props): React.ReactElement => {
+export const NavBar: React.FC<NavBarProps> = ({ children, bgColor }: NavBarProps): React.ReactElement => {
     return (
-        <NavBarContainer>
+        <NavBarContainer bgColor={bgColor}>
             <NavBarLeftElements>
                 <LogoContainer src={logo} alt="k tube" />
             </NavBarLeftElements>

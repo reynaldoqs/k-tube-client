@@ -4,7 +4,7 @@ import { RouteComponentProps } from '@reach/router';
 import { MainNavBar, VideoControlBar, VideoQueryResolver } from '../../containers';
 
 import { Header } from '../elements';
-import { KaraokeMain } from './elements';
+import { Controls, KaraokeMain, Player } from './elements';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const KaraokeView = (props: RouteComponentProps): React.ReactElement => {
@@ -14,8 +14,12 @@ export const KaraokeView = (props: RouteComponentProps): React.ReactElement => {
                 <MainNavBar />
             </Header>
             <KaraokeMain>
-                <VideoQueryResolver />
-                <VideoControlBar />
+                <Player>
+                    <VideoQueryResolver />
+                </Player>
+                <Controls>
+                    <VideoControlBar />
+                </Controls>
             </KaraokeMain>
         </>
     );

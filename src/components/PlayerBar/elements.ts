@@ -3,11 +3,12 @@ import styled from 'styled-components';
 const VIDEO_CARD_WIDTH = 70;
 
 export const PlayerBarContainer = styled.section`
-    margin-top: 20px;
     width: 100%;
     height: 100px;
-    border-radius: ${(props) => props.theme.borderRadius.lg} ${(props) => props.theme.borderRadius.lg} 0 0;
-    background-color: ${(props) => props.theme.colors.sections.mainBackground};
+    display: flex;
+    flex-direction: column;
+    background-color: ${(props) => props.theme.colors.sections.main};
+    background-image: ${(props) => props.theme.decoration.gradientBg};
 `;
 
 export const BarElementsContainer = styled.section`
@@ -95,5 +96,4 @@ export const AddVideoOption = styled.div`
     top: 0;
     left: 180px;
     border-radius: ${(props) => props.theme.borderRadius.sm};
-    background-color: ${(props) => props.theme.colors.sections.lightBackground};
 `;

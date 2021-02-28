@@ -4,8 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
-        background-color: ${(props) => props.theme.colors.sections.darkBackground};
-        color: gray;
+        background-color: ${(props) => props.theme.colors.sections.main};
     }
 
     *,*:after,*:before{
@@ -31,9 +30,9 @@ export const GlobalStyle = createGlobalStyle`
         
     ::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background: ${(props) => props.theme.colors.sections.mainBackground};
+        background: ${(props) => props.theme.colors.sections.main};
     }
     ::-webkit-scrollbar-thumb:window-inactive {
-        background: ${(props) => props.theme.colors.sections.mainBackground};
+        background: ${(props) => props.theme.colors.sections.main};
     }
 `;

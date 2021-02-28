@@ -1,5 +1,6 @@
 import React from 'react';
-import { faPlus, faPause, faCog, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPause, faPlay, faCog, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { map, slice } from 'ramda';
 
 import { ProgressBar } from '../ProgressBar';
 import { SongCard } from '../SongCard';
@@ -14,44 +15,69 @@ import {
     AddVideoOption,
     CurrentItems,
 } from './elements';
-import { FuncEmpty } from '../../types';
+import { FuncEmpty, Video } from '../../types';
 
 const img =
     'https://as01.epimg.net/epik/imagenes/2019/12/03/portada/1575384297_599943_1575384448_noticia_normal_recorte1.jpg';
 
 type Props = {
-    readonly onPlay?: FuncEmpty;
+    readonly onPlay: FuncEmpty;
     readonly onPause?: FuncEmpty;
+    readonly onDequeue: FuncEmpty;
     readonly isPlaying?: boolean;
     readonly progress: number;
+    readonly videosQueue: readonly Video[];
+    readonly currentVideo: Video | null;
 };
 
-export const PlayerBar: React.FC<Props> = ({ onPlay, onPause, isPlaying, progress }: Props): React.ReactElement => {
-    const fakeArr = [
-        { title: 'esta loca esta tip', subtitle: 'this is my case' },
-        { title: 'esta 6 esta tip', subtitle: 'this is my case' },
-        { title: 'esta loca 2 tip', subtitle: 'this is my case' },
-        { title: 'esta loca esta tip', subtitle: 'this is my case' },
-        { title: 'esta 2 esta tip', subtitle: 'this is my case' },
-        { title: 'esta 4 esta tip', subtitle: 'this is my case' },
-    ];
+export const PlayerBar: React.FC<Props> = ({
+    onPlay,
+    onPause,
+    onDequeue,
+    isPlaying = false,
+    progress,
+    videosQueue,
+    currentVideo,
+}: Props): React.ReactElement => {
+    const hasNextSong = videosQueue.length > 0;
+    const hasQueue = videosQueue.length > 1;
+    const renderVideo = (video: Video): React.ReactElement => (
+        <SongCard
+            key={video.id.videoId}
+            title={video.snippet.title}
+            subtitle="asda"
+            imgSrc={video.snippet.thumbnails.key.url}
+        />
+    );
+    const sliceAndMapVideos = map(renderVideo, slice(1, 5, videosQueue));
 
     return (
         <PlayerBarContainer>
             <BarElementsContainer>
                 <CurrentVideo>
                     <CurrentItems>
-                        <SongCard title="audiman" subtitle="asda" imgSrc={img} extended />
-                        <RoundedButton icon={faAngleDoubleLeft} />
-                        <SongCard title="audiman" subtitle="asda" imgSrc={img} extended />
+                        {currentVideo && (
+                            <SongCard
+                                title={currentVideo.snippet.title}
+                                subtitle="its for u k"
+                                imgSrc={currentVideo.snippet.thumbnails.key.url}
+                                extended
+                            />
+                        )}
+                        {hasNextSong && <RoundedButton onClick={onDequeue} icon={faAngleDoubleLeft} />}
+                        {hasNextSong && (
+                            <SongCard
+                                title={videosQueue[0].snippet.title}
+                                subtitle="asda"
+                                imgSrc={videosQueue[0].snippet.thumbnails.key.url}
+                                extended
+                            />
+                        )}
                     </CurrentItems>
                 </CurrentVideo>
                 <QueueVideos>
                     <QueList>
-                        <SongCard title="1111" subtitle="asda" imgSrc={img} />
-                        <SongCard title="222" subtitle="asda" imgSrc={img} />
-                        <SongCard title="3333" subtitle="asda" imgSrc={img} />
-                        <SongCard title="4444" subtitle="asda" imgSrc={img} />
+                        {hasQueue && sliceAndMapVideos}
                         <AddVideoOption>
                             <RoundedButton icon={faPlus} />
                         </AddVideoOption>
@@ -59,7 +85,7 @@ export const PlayerBar: React.FC<Props> = ({ onPlay, onPause, isPlaying, progres
                 </QueueVideos>
                 <VideoSettings>
                     <RoundedButton icon={faCog} />
-                    <RoundedButton icon={faPause} />
+                    <RoundedButton icon={isPlaying ? faPause : faPlay} onClick={isPlaying ? onPause : onPlay} />
                 </VideoSettings>
             </BarElementsContainer>
             <ProgressBar progress={progress} />

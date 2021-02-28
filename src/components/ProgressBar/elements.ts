@@ -10,7 +10,7 @@ export const ProgressBarContainer = styled.div<ProgressBarProps>`
     height: 8px;
     z-index: 1;
     position: relative;
-    background-color: ${(props) => props.theme.colors.sections.lightBackground};
+    background-color: ${(props) => props.theme.colors.sections.dark};
     &:before {
         content: '';
         width: ${(props) => props.progress}%;
@@ -18,6 +18,11 @@ export const ProgressBarContainer = styled.div<ProgressBarProps>`
         position: absolute;
         top: 0;
         left: 0;
-        background-color: ${(props) => props.theme.colors.primary.main};
+        border-radius: 0 4px 4px 0;
+        background-image: linear-gradient(
+            90deg,
+            ${(props) => props.theme.colors.primary.main},
+            ${(props) => props.theme.colors.secondary.main}
+        );
     }
 `;

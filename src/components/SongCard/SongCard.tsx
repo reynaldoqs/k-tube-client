@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SongCardImg, SongCardContainer, SongCardContent, SongCardText } from './elements';
 
 type Props = {
@@ -9,17 +9,15 @@ type Props = {
 };
 
 export const SongCard: React.FC<Props> = ({ title, subtitle, imgSrc, extended = false }: Props): React.ReactElement => {
-    const [isOpen, setIsOpen] = useState(extended);
-
     return (
         <SongCardContainer>
-            <SongCardContent isOpen={isOpen}>
-                <SongCardText isOpen={isOpen}>
+            <SongCardContent isOpen={extended}>
+                <SongCardText isOpen={extended}>
                     <h3>{title}</h3>
                     <h4>{subtitle}</h4>
                 </SongCardText>
             </SongCardContent>
-            <SongCardImg onClick={() => setIsOpen(!isOpen)} src={imgSrc} />
+            <SongCardImg src={imgSrc} />
         </SongCardContainer>
     );
 };

@@ -20,7 +20,6 @@ export const SongCardContent = styled.div<ToggleProps>`
     width: ${(props) => (props.isOpen ? conw : imgw)};
     overflow: hidden;
     transition: width 0.1s ease-out;
-    background-color: ${(props) => props.theme.colors.sections.lightBackground};
     border-radius: ${(props) => props.theme.borderRadius.sm};
 `;
 
@@ -63,4 +62,5 @@ export const SongCardImg = styled.img`
     left: 0;
     object-fit: cover;
     border-radius: ${(props) => props.theme.borderRadius.sm};
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
 `;

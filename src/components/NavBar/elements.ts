@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { NavBarProps } from './NavBar';
 
-export const NavBarContainer = styled.nav`
+export const NavBarContainer = styled.nav<Pick<NavBarProps, 'bgColor'>>`
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     width: 100%;
     display: flex;
-    background-color: ${(props) => props.theme.colors.sections.darkBackground};
+    background-color: ${(props) => (props.bgColor ? props.theme.colors.sections[props.bgColor] : 'transparent')};
     height: ${(props) => props.theme.components.navBar.smHeight};
     padding: 8px ${(props) => props.theme.mainPadding};
     @media ${(props) => props.theme.deviceBreakpoints.tablet} {

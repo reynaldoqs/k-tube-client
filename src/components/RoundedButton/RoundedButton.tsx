@@ -4,14 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { RoundedButtonContainer } from './elements';
 
-type Props = {
+export type Props = {
     readonly icon: IconDefinition;
+    readonly size?: 'md' | 'sm' | 'lg';
+    readonly flat?: boolean;
     readonly onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export const RoundedButton: React.FC<Props> = ({ icon, onClick }: Props): React.ReactElement => {
+export const RoundedButton: React.FC<Props> = ({
+    icon,
+    onClick,
+    flat = false,
+    size = 'md',
+}: Props): React.ReactElement => {
     return (
-        <RoundedButtonContainer onClick={onClick}>
+        <RoundedButtonContainer onClick={onClick} size={size} flat={flat}>
             <FontAwesomeIcon icon={icon} />
         </RoundedButtonContainer>
     );

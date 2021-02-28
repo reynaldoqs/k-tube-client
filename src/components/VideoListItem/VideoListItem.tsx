@@ -10,21 +10,22 @@ import {
     VideoMainOption,
 } from './elements';
 
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CardSubtitle, CardInformation } from '../sharedElements';
-import { IconButton } from '../IconButton';
+import { RoundedButton, IconButton } from '../';
 
 type Props = {
     readonly video: Video;
-    readonly onSelectVideo: FuncParam<string, void>;
+    readonly onPlayVideo: FuncParam<Video, void>;
+    readonly onEnqueueVideo: FuncParam<Video, void>;
 };
 
-export const VideoListItem: React.FC<Props> = ({ video, onSelectVideo }: Props): React.ReactElement => {
+export const VideoListItem: React.FC<Props> = ({ video, onPlayVideo, onEnqueueVideo }: Props): React.ReactElement => {
     return (
         <VideoItemContainer>
             <VideoAvatarContainer>
                 <VideoThumbnal loading="lazy" src={video.snippet.thumbnails.key.url} />
-                <VideoMainOption onClick={() => onSelectVideo(video.id.videoId)}>
+                <VideoMainOption onClick={() => onPlayVideo(video)}>
                     <IconButton size="lg" icon={faPlay} />
                 </VideoMainOption>
             </VideoAvatarContainer>
@@ -33,12 +34,9 @@ export const VideoListItem: React.FC<Props> = ({ video, onSelectVideo }: Props):
                 <CardInformation>duration 1:12 </CardInformation>
             </InformationContainer>
             <OptionsContainer>
-                <IconButton color="accent" bordered icon={faPlay} />
+                <RoundedButton onClick={() => onEnqueueVideo(video)} size="sm" flat icon={faPlus} />
+                <RoundedButton onClick={() => onPlayVideo(video)} size="sm" icon={faPlay} />
             </OptionsContainer>
         </VideoItemContainer>
     );
 };
-
-export const renderVideoItem = (video: Video, onSelectVideo: FuncParam<string, void>): React.ReactElement => (
-    <VideoListItem key={video.id.videoId} video={video} onSelectVideo={onSelectVideo} />
-);

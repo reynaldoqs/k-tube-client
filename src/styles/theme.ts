@@ -35,9 +35,9 @@ declare module 'styled-components' {
                 readonly lightest: string;
             };
             readonly sections: {
-                readonly mainBackground: string;
-                readonly lightBackground: string;
-                readonly darkBackground: string;
+                readonly main: string;
+                readonly light: string;
+                readonly dark: string;
             };
             readonly text: {
                 readonly primary: {
@@ -62,24 +62,33 @@ declare module 'styled-components' {
             readonly laptop: string;
             readonly desktop: string;
         };
+        readonly decoration: {
+            readonly boxShadow: {
+                readonly sm: string;
+                readonly md: string;
+                readonly lg: string;
+            };
+            readonly concaveBg: string;
+            readonly gradientBg: string;
+        };
     }
 }
 
 export const mainTheme: DefaultTheme = {
     borderRadius: {
-        sm: '6px',
-        md: '12px',
-        lg: '20px',
+        sm: '12px',
+        md: '24px',
+        lg: '40px',
     },
     mainPadding: '16px',
     colors: {
         primary: {
-            main: '#FF9E00',
+            main: '#26E8FE',
             light: 'white',
             dark: 'white',
         },
         secondary: {
-            main: 'white',
+            main: '#8142FF',
             light: 'white',
             dark: 'white',
         },
@@ -89,7 +98,7 @@ export const mainTheme: DefaultTheme = {
             dark: 'white',
         },
         neutral: {
-            main: '#C0C5D4',
+            main: 'white',
             dark: 'white',
             darker: 'white',
             light: 'white',
@@ -97,9 +106,9 @@ export const mainTheme: DefaultTheme = {
             lightest: 'white',
         },
         sections: {
-            mainBackground: '#10111D',
-            lightBackground: '#252136',
-            darkBackground: '#03040D',
+            main: '#212529',
+            light: '#2B3740',
+            dark: '#1C1F21',
         },
         text: {
             primary: {
@@ -123,5 +132,18 @@ export const mainTheme: DefaultTheme = {
         tablet: '(min-width: 768px)',
         laptop: '(min-width: 1024px)',
         desktop: '(min-width: 1440px)',
+    },
+    decoration: {
+        boxShadow: {
+            sm:
+                '6px 6px 14px 0 rgba(0, 0, 0, 0.25), -5px -5px 10px 0 rgba(200, 200, 200, 0.15), -5px -5px 10px 0 rgba(38, 232, 254, 0.16), 6px 6px 14px 0 rgba(129, 66, 255, .1);',
+            md:
+                '8px 8px 16px 0 rgba(0, 0, 0, 0.25), -6px -6px 12px 0 rgba(200, 200, 200, 0.15), -5px -5px 10px 0 rgba(38, 232, 254, 0.16), 6px 6px 14px 0 rgba(129, 66, 255, .1);',
+            lg:
+                '12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(255, 255, 255, 0.3), -5px -5px 10px 0 rgba(38, 232, 254, 0.16), 6px 6px 14px 0 rgba(129, 66, 255, .1);',
+        },
+        concaveBg: 'linear-gradient(135deg, rgba(0, 0, 0, 0.22), rgba(200, 200, 200, 0.25));',
+        gradientBg:
+            'linear-gradient(to right bottom, #292029, #2b232d, #2d2630, #302a34, #322d37, #322f39, #33313a, #33333c, #32343d, #32363d, #32373d, #32383d);',
     },
 };
