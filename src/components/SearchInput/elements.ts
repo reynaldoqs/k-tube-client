@@ -1,13 +1,10 @@
 import styled from 'styled-components';
-import { animated } from 'react-spring';
 
-export const SearchInputContainer = styled(animated.div)`
+export const SearchInputContainer = styled.div`
     background-color: ${(props) => props.theme.colors.sections.dark};
-    position: absolute;
     width: calc(100% - 12px);
     height: 40px;
     border-radius: 20px;
-    margin: 0 auto;
     max-width: 100%;
     display: flex;
     padding: 6px 10px;
@@ -17,7 +14,7 @@ export const SearchInputContainer = styled(animated.div)`
     }
 `;
 
-export const SearchIconContainer = styled(animated.div)``;
+export const SearchIconContainer = styled.div``;
 
 export const SearchInputEl = styled.input`
     border: none;

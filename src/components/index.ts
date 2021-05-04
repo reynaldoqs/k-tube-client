@@ -8,3 +8,4 @@ export * from './LoadingSpinner';
 export * from './RoundedButton';
 export * from './VideoPlayer';
 export * from './PlayerBar';
+export * from './TextButton';

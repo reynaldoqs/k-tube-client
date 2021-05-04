@@ -1,7 +1,7 @@
 import { pipe, otherwise, always, andThen, propOr } from 'ramda';
 
 import { videosApi } from '../../config';
-import { crudder } from '../';
+import { crudder } from '..';
 import { Video } from '../../types';
 
 const videos = crudder(videosApi, 'videos');

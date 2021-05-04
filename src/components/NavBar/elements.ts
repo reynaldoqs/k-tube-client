@@ -35,6 +35,6 @@ export const NavBarCenterElements = styled.section`
     justify-content: center;
     align-items: center;
     & > *:not(:first-child):not(:last-child) {
-        margin: 0 10px;
+        margin: 0 24px;
     }
 `;

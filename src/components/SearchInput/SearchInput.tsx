@@ -3,11 +3,8 @@ import React, { useRef, useEffect, useState, SetStateAction, Dispatch } from 're
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faArrowLeft, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useTransition, config } from 'react-spring';
-import { map } from 'ramda';
 
 import { SearchInputContainer, SearchInputEl, SourceAvatar, SearchOption, SearchIconContainer } from './elements';
-import { debounce } from '../../utils';
 import { IconButton } from '../IconButton';
 import { FuncParam } from '../../types';
 
@@ -16,20 +13,17 @@ type Props = {
 };
 export const SearchInput: React.FC<Props> = ({ onSearch }: Props): React.ReactElement => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const searchEmitter = (query: string): void => onSearch(query);
+    const [query, setQuery] = useState<string>('');
     const inputRef = useRef<HTMLInputElement>(null);
-    const onDebounceEmit = debounce(700, searchEmitter)();
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        onDebounceEmit(e.target.value);
+        setQuery(e.target.value);
     };
 
-    const inOutTransition: any = useTransition(isOpen, null, {
-        from: { position: 'absolute', transform: `scale(0.95)`, opacity: 0 },
-        enter: { transform: `scale(1)`, opacity: 1 },
-        leave: { transform: `scale(0.95)`, opacity: 0 },
-        config: config.stiff,
-    });
+    const onEmittHandler = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+        // eslint-disable-next-line functional/no-expression-statement
+        e.key === 'Enter' && onSearch(query);
+    };
 
     const toggleOpen = (setter: Dispatch<SetStateAction<boolean>>): void => setter((prevState: boolean) => !prevState);
 
@@ -40,27 +34,24 @@ export const SearchInput: React.FC<Props> = ({ onSearch }: Props): React.ReactEl
 
     useEffect(focusInput(inputRef), [isOpen]);
 
-    return map(
-        ({ item, key, props }: any) =>
-            item ? (
-                <SearchInputContainer key={key} style={props}>
-                    <SourceAvatar>
-                        <FontAwesomeIcon icon={faYoutube} />
-                    </SourceAvatar>
-                    <SearchOption>
-                        <IconButton onClick={() => toggleOpen(setIsOpen)} icon={faArrowLeft} />
-                    </SearchOption>
-                    <SearchInputEl onChange={onChangeHandler} placeholder="Search..." ref={inputRef} />
-                </SearchInputContainer>
-            ) : (
-                <SearchIconContainer key={key} style={props}>
-                    <IconButton onClick={() => toggleOpen(setIsOpen)} icon={faSearch} />
-                </SearchIconContainer>
-            ),
-        inOutTransition,
+    return isOpen ? (
+        <SearchInputContainer>
+            <SourceAvatar>
+                <FontAwesomeIcon icon={faYoutube} />
+            </SourceAvatar>
+            <SearchOption>
+                <IconButton onClick={() => toggleOpen(setIsOpen)} icon={faArrowLeft} />
+            </SearchOption>
+            <SearchInputEl
+                onChange={onChangeHandler}
+                onKeyDown={onEmittHandler}
+                placeholder="Search..."
+                ref={inputRef}
+            />
+        </SearchInputContainer>
+    ) : (
+        <SearchIconContainer>
+            <IconButton onClick={() => toggleOpen(setIsOpen)} icon={faSearch} />
+        </SearchIconContainer>
     );
 };
-
-export const renderSearchInput = (onSearchFunc: FuncParam<string, void>): React.ReactElement => (
-    <SearchInput onSearch={onSearchFunc} />
-);

@@ -5,7 +5,7 @@ import { pipe, andThen } from 'ramda';
 import { navigate as onNavigate } from '@reach/router';
 
 import { Video } from '../../types';
-import { searchVideos } from '../../api/videos';
+import { searchVideos } from '../../services/videos';
 import { LoadingSpinner, VideoListVertical } from '../../components';
 import { setStateAndPipeData, setPipedDataAndSetState } from '../../utils';
 import { updateVideosOnQuery } from './SearchQueryResolver.logic';
